@@ -22,10 +22,14 @@ namespace cvr
 struct WebSingletons {
     static easywsclient::WebSocket::pointer menu() {
         static std::string url = "ws://localhost:8126/menu/";
-        static easywsclient::WebSocket::pointer socket = easywsclient::WebSocket::from_url(url);
+        static easywsclient::WebSocket::pointer = NULL;
         if (!socket) {
-            if (!socket) { fprintf(stderr, "WARNING: Failed to connect to %s\n", url.c_str()); }
-            socket = easywsclient::WebSocket::create_dummy();
+            socket = easywsclient::WebSocket::from_url(url);
+            if (!socket) {
+                fprintf(stderr, "WARNING: Failed to connect to %s\n", url.c_str());
+                socket = easywsclient::WebSocket::create_dummy();
+            }
+            socket->send("[\"reset\"]");
         }
         return socket;
     }
