@@ -22,7 +22,7 @@ namespace cvr
 struct WebSingletons {
     static easywsclient::WebSocket::pointer menu() {
         static std::string url = "ws://localhost:8126/menu/";
-        static easywsclient::WebSocket::pointer = NULL;
+        static easywsclient::WebSocket::pointer socket = NULL;
         if (!socket) {
             socket = easywsclient::WebSocket::from_url(url);
             if (!socket) {

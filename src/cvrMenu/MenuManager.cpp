@@ -20,6 +20,9 @@ void menu_handler(const std::string & message)
     MenuCheckbox * menu_checkbox;
     int value;
     char b;
+    if (strcmp(message.c_str(), "[\"calvr-ping\"]") == 0) {
+        WebSingletons::menu()->send("[\"calvr-pong\"]");
+    }
     if (sscanf(message.c_str(), "[\"menuCallback\",\"%p\"]", (void **) &menu_item) == 1) {
         printf("%s\n", message.c_str());
         if (menu_item->getCallback()) {
